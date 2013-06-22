@@ -1,5 +1,5 @@
 Meep_cylinder_scattering_project
 ================================
-attached are the input files for calculating extinction, scattering, absorption of a cylinder in meep. The results are also compred to an analytical solution. 
+This project contains code to calculate extinction, scattering, absorption of a cylinder in meep. A The results are also compared to an analytical solution. 
 
-You will need a system like ubuntu with meep, octave3.2 installed. Everything is automated. The shell script file will do everything it calls meep and octave. just run the shell file in your terminal. 
+You will need a system like ubuntu with meep and octave3.2 installed. The shell script file will do everything it calls meep and octave.
