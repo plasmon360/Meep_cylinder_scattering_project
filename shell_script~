@@ -1,0 +1,64 @@
+#This code calculates the extinction, scattering and absorption cross-sections of 2d cylinder.
+#Code written by Bala krishna Juluri, http://juluribk.com, Feb 21, 2012
+
+#!/bin/bash
+
+#a  Normalization unit used in teh simulation in m
+#fcen % Central frequency of Gaussian pulse in angular frequency units
+#df %Width of Gaussian pulse in the angular frequency units
+#Wavelength used in teh simulation will be lam_min=a/(fcen+df/2) and lam_max=a/(fcen-df/2)
+#resl; Resolution used in meep code
+#aspect_ratio: Aspect ration of the structure/
+#Sample: controls the number of data points that are taken in one cycle of the code
+#N % Factor for the FFT points, higher the factor the smaller the frequency spacing (only used by the post-processing code and not by meep code).
+#pw=unit_cell_size/width_of_metal_slab; width_of_metal_slab=aspect_ratio*thickness
+a=100e-9
+resl=25
+fcen=0.3
+df=0.3
+nfreq=60
+clean=1
+
+rm *.h5
+rm *.png
+rm *.gif
+#Calculate the files with no structure (base simulation)
+meep resl=$resl fcen=$fcen df=$df nfreq=$nfreq structure?=false scattering?=true cylinder_silver2.ctl |tee nostructure.out
+grep flux1: nostructure.out >incident_flux.dat
+sed -i 's/flux1:, / /g' incident_flux.dat
+
+#Calcualtes the files with the structure
+meep resl=$resl fcen=$fcen df=$df nfreq=$nfreq structure?=true scattering?=true cylinder_silver2.ctl |tee structure_scat.out
+grep flux1: structure_scat.out >trans_flux_structure_scat.dat
+sed -i 's/flux1:, / /g' trans_flux_structure_scat.dat
+
+#Calcualtes the files with the structure
+meep resl=$resl fcen=$fcen df=$df nfreq=$nfreq structure?=true scattering?=false cylinder_silver2.ctl |tee structure_abs.out
+grep flux1: structure_abs.out >trans_flux_structure_abs.dat
+sed -i 's/flux1:, / /g' trans_flux_structure_abs.dat
+
+#h5topng -t 50:200 -S3 -Rc -dkbluered cylinder_silver2-Ex.h5  
+#convert *.png Ex_movie.gif
+#rm *.png
+
+#h5topng cylinder_silver2-eps.h5 
+#rm *.h5 
+
+octave  --eval 'cross_section' # Does the post_processing and takes the input parameters from the variable file.
+
+#runs bhcyl code
+cd bhcyl_analytical
+chmod a+x bhcyl_exec
+octave --eval 'octave_bhcyl_code'
+cd ..
+
+octave  --eval 'fdtd_vs_analytical' # Does the post_processing and takes the input parameters from the variable file.
+
+if clean==1; then
+rm *.dat
+rm *.out
+rm *.h5 
+fi
+
+
+

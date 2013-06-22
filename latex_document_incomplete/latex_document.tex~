@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{fontspec}
+\setromanfont{Gentium}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\begin{document}
+
+Particles scatter and absorb electromagnetic radiation. One often needs to compare the amount of scattering/absorption/extinction for particles of different shapes, composition, sizes and incident light properties (polarization, frequency and angle). In this regard, the concept of cross-sections comes into picture. There are three types of cross-sections, 1) scattering 2) absorption and 3) extinction. All of them have units of area, $m^2$, (which I will show soon) and provide a measure to quantify scattering/absorption process. 
+
+To understand the concept of cross-section, one needs to understand how to quantify the transfer of electromagnetic energy over the surface. Consider a surface $A$ which encloses a volume $V$. We can also choose a normal vector,$\hat{n}$, on every point of $A$, such that it has postive magnitude as it faces outwards. The rate at which electromagnetic energy transfers from this surface is given by $\bm{W}=-\oint\bm{S} \cdot \hat{n} dA$, where $\bm{S}$ indicates the time-averaged poynting vector. Time-averaged Poynting vector indicates the average rate of transfer of electromagnetic energy per unit area and is given by, $\bm{S}=\frac{1}{2}Re\{\bm{E} \times \bm{H}^*\}$. It has the units of $W/m^2$. A negative $\bm{W}$ indicates energy transferred out of the surface and positive $\bm{W}$ indicates transfer of energy into the surface. 
+
+Now lets imagine a particle of arbitrary geometry enclosed by $A$ and light of some frequency and polarization hits this particle. At any point belonging to $A$, the time-averaged Poynting vector at that point is given by $\bm{S}=\frac{1}{2}Re\{\bm{E} \times \bm{H}^*\}$. $\bm{S}$ is a sum of three terms, $\bm{S}=\bm{S_i}+\bm{S_s}+\bm{S_{ext}}$. $S_i$ represents the time-averaged Poynting vector due to incident light, $S_s$ represents the time-averaged Poynting vector of scattered light and $S_{ext}$ represents the time-averaged Poynting vector of interaction due to scattered light and incident light. They can expressed interms of scattered and incident electric and magnetic fields by following relations:
+\begin{align*}
+\bm{S_i}=\frac{1}{2}Re\{\bm{E_i} \times \bm{H_i}^*\},\\
+\bm{S_s}=\frac{1}{2}Re\{\bm{E_s} \times \bm{H_s}^*\},\\
+\bm{S_{ext}}=\frac{1}{2}Re\{\bm{E_i} \times \bm{H_s}^*+\bm{E_s} \times \bm{H_i}^*\}
+\end{align*}
+
+
+The rate at which energy comes into the surface $A$ is given by $\bm{W_i}=-\oint\bm{S_i}\cdot \hat{n} dA$, where $\bm{S_i}=\frac{1}{2}Re\{\bm{E_i} \times \bm{H_i}^*\}$. The rate at which energy gets scattered and transfers out of $A$ is given $\bm{W_s}=-\oint\bm{S_s}\cdot \hat{n} dA$, where $\bm{S_s}=\frac{1}{2}Re\{\bm{E_s} \times \bm{H_s}^*\}$.
+
+A part of incident lights gets scattered and the rate at which scattered light is transferred across A is given $\mathbf{W_{scat}}=-\oint\bm{S_{scat}}\cdot dA$. A part of it gets also absorbed 
+
+ and a part of light gets absorbed by the particle. 
+Lets start with quantification of scattering process, if we assume a surface (A) that completely surrounds the particle, there is rate at which scattered energy ($W_{scat}$) is transferred across this surface, this is given by the integeral of poynting vector (which is electromagnetic energy/unit area, $W/m^2$) over the whole surface. 
+
+In other words, $P_{scat}(\omega)=Re\left [\hat{n}\cdot  \oint_{A}\bm{E}_{scat}(\omega)\times \bm{H^*}_{scat}(\omega).d^2x\right ]$, 
+
+     
+
+
+$\bm{E}_{scat}(\omega)=\bm{E}(\omega)-\bm{E}_{inc}(\omega)$\\
+
+
+$P_{abs}(\omega)=Re\left [\hat{n}\cdot  \oint_{Monitors}\mathbf{E}(\omega)\times \mathbf{H^*}(\omega).d^2x\right ]$\\
+
+$\sigma_{scat}(\omega)=\frac{P_{scat}(\omega)}{I_{inc}(\omega)}$\\
+
+$\sigma_{abs}(\omega)=\frac{P_{abs}(\omega)}{I_{inc}(\omega)}$\\
+
+\end{document}
